@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: Agents-review
+---
+
+spring:
+  main:
+    banner-mode: off
+  datasource:
+    url: jdbc:mysql://localhost:3306/valorant_agents_review
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: admin
+  data:
+    jdbc:
+      dialect: mysql
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+logging:
+  level:
+    root: INFO
+    com.milan.controller: DEBUG           # Show detailed logs for your controller
+    com.milan.service: INFO               # Service logs (optional)
+    org:
+      hibernate:
+        SQL: DEBUG                        # Show SQL queries
+        type:
+          descriptor:
+            sql: TRACE                    # Show parameter bindings
+
+jwt:
+  secretKey: 9s+Qyje8oSwlojbAf+rMV8Lym0ijAVzao9jTJZCfbNQ=
+
+
