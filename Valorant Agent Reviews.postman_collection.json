@@ -1,0 +1,393 @@
+{
+	"info": {
+		"_postman_id": "a422f226-fc88-4395-85cc-acd3d491970a",
+		"name": "Valorant Agent Reviews",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40228881"
+	},
+	"item": [
+		{
+			"name": "Agents",
+			"item": [
+				{
+					"name": "CREATE/UPDATE AGENT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siaWQiOjIsIm5hbWUiOiJVU0VSIn1dLCJpZCI6MSwic3ViIjoibGFtYW1lZWxhbjMyQGdtYWlsLmNvbSIsImlhdCI6MTc0NDY5NjkyNiwiZXhwIjoxNzQ0NzMyOTI2fQ.2CBsG4i-_QIQsgPeWlX3N7ghyCWfGXa6HHMqDSa2Gl4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  { \"id\":17,\r\n   \"name\": \"Harbor Indian update\", \r\n   \"type\": \"Controller\"\r\n   }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/agents/create-update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"agents",
+								"create-update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL AGENTS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siaWQiOjIsIm5hbWUiOiJVU0VSIn1dLCJpZCI6MSwic3ViIjoibGFtYW1lZWxhbjMyQGdtYWlsLmNvbSIsImlhdCI6MTc0NTA2MTg5MCwiZXhwIjoxNzQ1NjY2NjkwfQ.ilYLYsmeMGImziW9JNm5fdCMIZXB7NIWtYGYz7gSEy0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/agents/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"agents",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET AGENT BY ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siaWQiOjIsIm5hbWUiOiJVU0VSIn1dLCJpZCI6MSwic3ViIjoibGFtYW1lZWxhbjMyQGdtYWlsLmNvbSIsImlhdCI6MTc0NDY5NjkyNiwiZXhwIjoxNzQ0NzMyOTI2fQ.2CBsG4i-_QIQsgPeWlX3N7ghyCWfGXa6HHMqDSa2Gl4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/agents/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"agents",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE AGENT BY ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/agents/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"agents",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"MilanLama\",\r\n  \"email\": \"lamameelan32@gmail.com\",\r\n  \"password\": \"SecurePass123\",\r\n  \"roles\": [\r\n    {\r\n      \"id\": 2\r\n    }\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"lamameelan32@gmail.com\",\r\n    \"password\":\"SecurePass123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "CREATE REVIEW",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siaWQiOjIsIm5hbWUiOiJVU0VSIn1dLCJpZCI6MSwic3ViIjoibGFtYW1lZWxhbjMyQGdtYWlsLmNvbSIsImlhdCI6MTc0NDcxMzI2MCwiZXhwIjoxNzQ0NzQ5MjYwfQ.wJ8JhyZtMmemxt4yfrQJpY0um-wLjrtgYkNMDi1Lj3Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Nice Agent Jett\",\r\n  \"comment\": \"Can enter site quickly with her dash. Her knives are best. Trying to create review again\",\r\n  \"stars\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/agents/reviews/create-update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"agents",
+								"reviews",
+								"create-update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siaWQiOjIsIm5hbWUiOiJVU0VSIn1dLCJpZCI6MSwic3ViIjoibGFtYW1lZWxhbjMyQGdtYWlsLmNvbSIsImlhdCI6MTc0NDcxMzI2MCwiZXhwIjoxNzQ0NzQ5MjYwfQ.wJ8JhyZtMmemxt4yfrQJpY0um-wLjrtgYkNMDi1Lj3Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n   \"id\": 2, // give review_id for update\r\n  \"title\": \"Best Duelist\",\r\n  \"comment\": \"Can enter site quickly with her dash. Her knives are best. Updated new\",\r\n  \"stars\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/agents/reviews/create-update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"agents",
+								"reviews",
+								"create-update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL REVIEWS OF THAT AGENT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siaWQiOjIsIm5hbWUiOiJVU0VSIn1dLCJpZCI6MSwic3ViIjoibGFtYW1lZWxhbjMyQGdtYWlsLmNvbSIsImlhdCI6MTc0NDcxNDI2MCwiZXhwIjoxNzQ0NzUwMjYwfQ.cOlvwchHWEKb702KNa9YgReTBw9GaMRc03mWjtUXwfs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/agents/reviews/getByAgentId/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"agents",
+								"reviews",
+								"getByAgentId",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE REVIEW",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/agents/reviews/1/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"agents",
+								"reviews",
+								"1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ONLY ONE REVIEW ACCORDING TO AGENT ID AND REVIEW ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W3siaWQiOjIsIm5hbWUiOiJVU0VSIn1dLCJpZCI6MSwic3ViIjoibGFtYW1lZWxhbjMyQGdtYWlsLmNvbSIsImlhdCI6MTc0NDcxNDI2MCwiZXhwIjoxNzQ0NzUwMjYwfQ.cOlvwchHWEKb702KNa9YgReTBw9GaMRc03mWjtUXwfs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/agents/reviews/1/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"agents",
+								"reviews",
+								"1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
