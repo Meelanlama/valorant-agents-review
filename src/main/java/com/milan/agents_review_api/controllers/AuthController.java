@@ -2,6 +2,7 @@ package com.milan.agents_review_api.controllers;
 
 import com.milan.agents_review_api.dto.LoginRequest;
 import com.milan.agents_review_api.dto.LoginResponse;
+import com.milan.agents_review_api.dto.RefreshTokenRequest;
 import com.milan.agents_review_api.dto.UserDto;
 import com.milan.agents_review_api.service.AuthService;
 import com.milan.agents_review_api.util.CommonUtil;
@@ -43,5 +44,15 @@ public class AuthController {
         }
 
         return CommonUtil.createBuildResponse(loginResponse, HttpStatus.OK);
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<?> refresh(@RequestBody RefreshTokenRequest request) {
+        try {
+            LoginResponse loginResponse = authService.refreshToken(request.getRefreshToken());
+            return CommonUtil.createBuildResponse(loginResponse, HttpStatus.OK);
+        } catch (Exception e) {
+            return CommonUtil.createErrorResponseMessage(e.getMessage(), HttpStatus.UNAUTHORIZED);
+        }
     }
 }

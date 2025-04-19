@@ -9,6 +9,8 @@ public class LoginResponse {
 
     private UserResponse user;
 
-    private String token;
+    private String accessToken;
+
+    private String refreshToken;
 
 }

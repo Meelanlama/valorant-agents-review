@@ -17,6 +17,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +41,9 @@ public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authenticationManager;
 
     private final JwtService jwtService;
+
+    private final UserDetailsService userDetailsService;
+
 
     @Override
     public Boolean registerUser(UserDto userDto) throws Exception {
@@ -71,14 +76,50 @@ public class AuthServiceImpl implements AuthService {
                 (loginRequest.getEmail(), loginRequest.getPassword()));
 
         if(authenticate.isAuthenticated()) {
-           CustomUserDetails customUserDetails = (CustomUserDetails) authenticate.getPrincipal();
+            CustomUserDetails customUserDetails = (CustomUserDetails) authenticate.getPrincipal();
+            User user = customUserDetails.getUser();
 
-           String token = jwtService.generateToken(customUserDetails.getUser());
+           String token = jwtService.generateToken(user);
+           String refreshToken = jwtService.generateRefreshToken(user); // Separate refresh token
 
-           return LoginResponse.builder()
+            return LoginResponse.builder()
                    .user(mapper.map(customUserDetails.getUser(), UserResponse.class))
-                   .token(token).build();
+                   .accessToken(token)
+                   .refreshToken(refreshToken).build();
         }
         return null;
     }
+    @Override
+    public LoginResponse refreshToken(String refreshToken) {
+
+        // Extract the username (email) from the refresh token
+        String username = jwtService.extractUsername(refreshToken);
+
+        // Retrieve the user from the database
+        User user = userRepo.findByEmail(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // Load the UserDetails object for token validation
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
+        // Validate the refresh token using the UserDetails object
+        boolean isValid = jwtService.validateToken(refreshToken, userDetails);
+
+        if (!isValid) {
+            throw new RuntimeException("Invalid or expired refresh token");
+        }
+
+        // Generate a new access token and optional new refresh token (token rotation)
+        String newAccessToken = jwtService.generateToken(user);
+        String newRefreshToken = jwtService.generateRefreshToken(user);
+
+        // Return the response with the new tokens
+        return LoginResponse.builder()
+                .user(mapper.map(user, UserResponse.class))
+                .accessToken(newAccessToken)
+                .refreshToken(newRefreshToken)
+                .build();
+    }
+
+
 }

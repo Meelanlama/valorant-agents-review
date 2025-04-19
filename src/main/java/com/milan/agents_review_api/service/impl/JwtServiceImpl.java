@@ -39,11 +39,28 @@ public class JwtServiceImpl implements JwtService {
                .claims().add(claims)
                .subject(user.getEmail())
                .issuedAt(new Date(System.currentTimeMillis()))
-               .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
+               .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 15)) // 15 mins
                .and().signWith(getKey())
                .compact();
 
        return token;
+    }
+
+    @Override
+    public String generateRefreshToken(User user) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("id", user.getId());
+        claims.put("roles", user.getRoles());
+
+        String refreshToken = Jwts.builder()
+                .claims().add(claims)
+                .subject(user.getEmail())
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 24 * 7)) // 7 days
+                .and().signWith(getKey())
+                .compact();
+
+        return refreshToken;
     }
 
     public Key getKey() {
